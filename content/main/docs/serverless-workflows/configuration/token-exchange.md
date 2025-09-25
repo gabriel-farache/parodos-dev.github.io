@@ -4,7 +4,7 @@ date: 2025-09-17
 ---
 Token Exchange lets a workflow swap the incoming end‑user token for a new access token tailored to a downstream OpenAPI‑secured service. Use it when you must not forward the original token or when workflows run long enough that the original token may expire.
 
-See the upstream reference for full details: Token Exchange for OpenAPI services in SonataFlow (`https://sonataflow.org/serverlessworkflow/latest/security/token-exchange-for-openapi-services.html`).
+See the upstream reference for full details: Token Exchange for OpenAPI services in SonataFlow (`https://sonataflow.org/serverlessworkflow/main/security/token-exchange-for-openapi-services.html`).
 
 # Prerequisites
 * Keycloak or another OIDC provider that supports OAuth 2.0 Token Exchange
@@ -97,7 +97,7 @@ With:
 * `provider`: the RHDH provider name; the Orchestrator plugin sends user tokens as `X-Authorization-{provider}: {token}`.
 
 ### Configuration reference
-* SonataFlow Token Exchange guide: [Token Exchange for OpenAPI services](https://sonataflow.org/serverlessworkflow/latest/security/token-exchange-for-openapi-services.html)
+* SonataFlow Token Exchange guide: [Token Exchange for OpenAPI services](https://sonataflow.org/serverlessworkflow/main/security/token-exchange-for-openapi-services.html)
 * SonataFlow configuration properties (headers persistence): [Core configuration properties](https://sonataflow.org/serverlessworkflow/main/core/configuration-properties.html)
 * Quarkus OIDC Client: [OpenID Connect (OIDC) client](https://quarkus.io/guides/security-openid-connect-client)
 * Quarkus OIDC Client Filter (REST Client): [REST Client OIDC client filter](https://quarkus.io/guides/security-openid-connect-client#rest-client-oidc-client-filter)
@@ -116,7 +116,7 @@ quarkus.openapi-generator.<another_service_id>.auth.<auth_name>.header-name=X-Au
 
 # Caching and persistence
 
-When enabled, exchanged tokens are cached per process instance and auth name, with proactive refresh before expiry. By default, an in‑memory cache is used. To persist cache entries, add the JDBC persistence extension in the `QUARKUS_EXTENSIONS` when building the image: see https://sonataflow-docs-preview-pr-737.surge.sh/serverlessworkflow/latest/cloud/operator/build-and-deploy-workflows.html#passing-build-arguments-to-internal-workflow-builder
+When enabled, exchanged tokens are cached per process instance and auth name, with proactive refresh before expiry. By default, an in‑memory cache is used. To persist cache entries, add the JDBC persistence extension in the `QUARKUS_EXTENSIONS` when building the image: see https://sonataflow.org/serverlessworkflow/latest/cloud/operator/build-and-deploy-workflows.html#passing-build-arguments-to-internal-workflow-builder
 
 For local debug/dev, you can add it in your local `pom.xml` file:
 
