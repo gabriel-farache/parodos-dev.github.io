@@ -14,6 +14,7 @@ This document provides solutions to common problems encountered with serverless 
 2. [Workflow Errors](#workflow-errors)
 3. [Configuration Problems](#configuration-problems)
 4. [Workflow not showing in RHDH UI](#workflow-not-showing-in-rhdh-ui)
+5. [Maven mirror] (#maven-mirror)
 
 ---
 
@@ -195,3 +196,31 @@ You should now make sure the properties are correctly set in the `managed-props`
    See [RBAC documentation](../installation/rbac/) for detailed permission configuration.
 
 To see if there is a permission issue, you have to set the log level to DEBUG, see https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/monitoring_and_logging/assembly-monitoring-and-logging-with-aws_assembly-rhdh-observability#configuring-the-application-log-level-by-using-the-operator_assembly-rhdh-observability
+
+## Maven Mirror
+If you need to build a workflow's image but you are behind a proxy that does not allow to access maven repositories on the internet, you may need to specify you own maven mirror, reachable from you network.
+To do so, you need to set the `MAVEN_MIRROR_URL` environment variable to your own maven repository. This environment variable must be set within the Dockfile you are using to build the image using the `logic-swf-builder` image or any custom image you may use as base image.
+Based on what you have it may or may not resemble to:
+```
+ARG BUILDER_IMAGE
+ARG RUNTIME_IMAGE
+
+FROM ${BUILDER_IMAGE} AS builder
+
+...
+...
+# Setting maven mirror
+ENV MAVEN_MIRROR_URL=<your repository>
+
+...
+...
+
+RUN /home/kogito/launch/build-app.sh ./resources
+
+#=============================
+# Runtime
+#=============================
+FROM ${RUNTIME_IMAGE}
+...
+...
+```
